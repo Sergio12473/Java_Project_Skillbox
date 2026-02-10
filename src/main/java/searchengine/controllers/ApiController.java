@@ -23,34 +23,34 @@ public class ApiController {
     private final IndexService indexService;
 
     @GetMapping("/statistics")
-    public ResponseEntity<StatisticsResponse> statistics() {
-        return ResponseEntity.ok(statisticsService.getStatistics());
+    public StatisticsResponse statistics() {
+        return statisticsService.getStatistics();
     }
 
     @GetMapping("/startIndexing")
-    public ResponseEntity<IndexResponse> startIndexing() {
+    public IndexResponse startIndexing() {
         log.info("Индексация началась");
-        return ResponseEntity.ok(indexService.startIndexing());
+        return indexService.startIndexing();
     }
 
     @GetMapping("/stopIndexing")
-    public ResponseEntity<IndexResponse> stopIndexing() throws InterruptedException {
+    public IndexResponse stopIndexing() throws InterruptedException {
         log.info("Индексация остановлена");
-        return ResponseEntity.ok(indexService.stopIndexing());
+        return indexService.stopIndexing();
     }
 
     @PostMapping("/indexPage")
-    public ResponseEntity<IndexResponse> startIndexingPage(@RequestBody String url) {
+    public IndexResponse startIndexingPage(@RequestBody String url) {
         log.info("Индексация страницы {} началась", url);
-        return ResponseEntity.ok(indexService.startIndexingPage(url));
+        return indexService.startIndexingPage(url);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<SearchResponse> searchWithSite(@RequestParam("query") String query,
+    public SearchResponse searchWithSite(@RequestParam("query") String query,
                                                          @RequestParam(defaultValue = "all") String site,
                                                          @RequestParam("offset") int offset,
                                                          @RequestParam("limit") int limit) {
         log.info("Поиск");
-        return ResponseEntity.ok(searchService.search(new SearchRequest(query, site, offset, limit)));
+        return searchService.search(new SearchRequest(query, site, offset, limit));
     }
 }

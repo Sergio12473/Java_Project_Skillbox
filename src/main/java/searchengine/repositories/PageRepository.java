@@ -13,8 +13,7 @@ import java.util.List;
 
 @Repository
 public interface PageRepository extends JpaRepository<Page, Long> {
-    @Transactional
-    @Modifying
+
     @Query("delete from Page p where p.id in ?1")
     void deleteByIdIn(Collection<Integer> ids);
 

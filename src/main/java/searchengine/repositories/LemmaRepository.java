@@ -25,6 +25,6 @@ public interface LemmaRepository extends JpaRepository<Lemma, Long> {
     @Query("select count(l) from Lemma l where l.site = ?1")
     long countBySite(Site site);
 
-    @Transactional
+
     void deleteBySite(Site site);
 }

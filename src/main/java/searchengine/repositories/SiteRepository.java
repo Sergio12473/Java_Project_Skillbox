@@ -15,8 +15,8 @@ import java.util.Optional;
 public interface SiteRepository extends JpaRepository<Site, Long> {
     Optional<Site> findByUrlLikeIgnoreCase(String url);
     Optional<Site> findByUrlIgnoreCase(String url);
-    @Transactional
-    @Modifying
+
+
     @Query("update Site s set s.status = ?1, s.statusTime = ?2, s.lastError = ?3 where s.id = ?4")
     void updateStatusAndStatusTimeAndLastErrorById(IndexStatus status, LocalDateTime statusTime, String lastError, Integer id);
 

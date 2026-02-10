@@ -14,8 +14,8 @@ import java.util.List;
 
 @Repository
 public interface IndexRepository extends JpaRepository<Index, Long> {
-    @Transactional
-    @Modifying
+
+
     @Query("delete from Index i where upper(i.page) in ?1")
     void deleteByPageInAllIgnoreCase(Collection<Page> pages);
 
